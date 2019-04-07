@@ -1,4 +1,4 @@
-# GeolocationAPIProject
+# Geolocation API Project
 
 This Project enables you to view the locations of places on the Google map as well as it stores those places in the database. 
 These stored locations can also be viewed / checked .
