@@ -26,10 +26,12 @@ locahost:8080
 
 
 # Caution 
-No need to create a database and table in MYSQL. It is already created in the application.  And once created , again if you re-run node server.js , you will get error as Database already exists. So please drop the database locationsdata by running the command -
+No need to create a database and table in MYSQL. It is already created through the application.  And once created , again if you re-run node server.js , you will get error as Database already exists. So please drop the database locationsdata by running the command -
 
 drop database locationsdata;
 
+And then run 
+node server.js
 
 
 Good Luck !
