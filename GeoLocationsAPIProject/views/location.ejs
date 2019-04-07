@@ -1,0 +1,149 @@
+<html>
+
+<head>
+  <title>Geolocation</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <style>
+    #map {
+      height: 425px;
+    }
+
+    .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.checkData{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  color : #4CAF50;
+}
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #floating-panel {
+      position: absolute;
+      top: 10px;
+      left: 25%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+  </style>
+
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwgU_zhAo8cKy6THHRrcpwJDRlFIc4taM&callback=initMap">
+  </script>
+</head>
+
+<body>
+
+
+  <!-- <div id="database" (click) = "Check Database"></div> -->
+
+  <form method="post" action="/database" novalidate>
+    <div class="form-field">
+      <label for="location" class="checkData">Check Values in Database : </label>
+    </div>
+
+    <div class="form-actions">
+      <button class="button" type="submit">Check Database</button>
+    </div>
+  </form>
+  <br>
+  <br>
+  
+  
+  <div id="floating-panel">
+    <input id="address" type="textbox" value="Sydney, NSW">
+
+    <div>
+      <button id="submit" type="submit" value="Insert and View Location">Insert and View Location</button>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+
+
+    // NEW CODE 
+    function initMap() {
+
+
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: { lat: -34.397, lng: 150.644 }
+      });
+      var geocoder = new google.maps.Geocoder();
+
+      document.getElementById('submit').addEventListener('click', function () {
+        geocodeAddress(geocoder, map);
+        loadXMLDoc();
+      });
+
+     
+    }
+
+    function geocodeAddress(geocoder, resultsMap) {
+      var address = document.getElementById('address').value;
+      // var address = document.getElementById('events').innerHTML;
+      geocoder.geocode({ 'address': address }, function (results, status) {
+        console.log("results = ", results)
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+
+          // resultsMap.setCenter(_.P);
+
+          var marker = new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+
+    function loadXMLDoc() {
+      console.log("Inside loadXMLDoc()");
+      var address = document.getElementById('address').value;
+
+console.log("Address = ", address);
+     
+
+      var xhttp = new XMLHttpRequest();
+      var data = {"name": address};
+      var sendString = JSON.stringify(data);
+      
+      xhttp.open('POST', '/saveInDatabase', true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(sendString);
+
+    }
+
+  </script>
+</body>
+
+</html>

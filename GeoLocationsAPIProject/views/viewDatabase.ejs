@@ -1,0 +1,30 @@
+<body>
+    <table id="table" >  
+        <thead>  
+            <tr>  
+                <th>Locations viewed so far :</th>  
+               
+            </tr>  
+        </thead>  
+         <tbody>  
+         <% print.forEach(function (user) { %>
+            <tr>  
+                <td><ul>
+                    <li>
+                        <%= user.value %>
+                    </li>
+                </ul></td>  
+               
+            </tr>                                   
+         <% }) %>
+         <tr>
+             <td >
+                <a style = "margin-left: 250px" href="/backToLocation">Back</a>
+             </td>
+         </tr>
+         </tbody>
+
+    </table>   
+</body>
+
+</html>
