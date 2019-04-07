@@ -12,7 +12,7 @@ npm - 5.6.0,
 node - v8.11.1
 
 # To run the application
-Enter the commands -
+Enter the commands in the Terminal -
 
 [1] npm install
 
