@@ -7,9 +7,10 @@ These stored locations can also be viewed / checked .
 # Database used -
 MYSQL
 
-# Versions
+# Requirements & Versions
 npm - 5.6.0, 
 node - v8.11.1
+MYSQL Server 5.1 and above or MYSQL Server Workbench
 
 # To run the application
 Enter the commands in the Terminal -
